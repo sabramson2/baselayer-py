@@ -1,5 +1,6 @@
 import util as u
-
+import ctx
+import req
 
 class TestObj:
     def __init__(s):
@@ -19,5 +20,10 @@ def test0():
     u.p(u.b64e('hello world'))
     u.exampleCpuPool()
 
+def test1():
+    c = ctx.generic('http://example.com')
+    r = req.geth(c, '')
+    u.lrd(r)
 
-test0()
+#test0()
+test1()
