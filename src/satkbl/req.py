@@ -3,14 +3,18 @@ from http.cookies import SimpleCookie
 
 import requests
 
-import util as u
-import ctx
+import satkbl.util as u
+import satkbl.ctx as ctx
 
 # consts for content types
 t_html = 'text/html'
 t_json = 'application/json'
 t_form = 'application/x-www-form-urlencoded'
 
+def test():
+    u.l('test')
+
+#----------------------------------------
 # class to hold response data
 class ResponseObj:
     def __init__(s):
@@ -21,6 +25,7 @@ class ResponseObj:
         s.headers = None
         s.status = None
 
+#----------------------------------------
 # GET a specific type
 def gett(c, path, type):
     headers = {
@@ -33,6 +38,7 @@ def gett(c, path, type):
         r = requests.get(url, headers=headers, verify=False)
     return r
 
+#----------------------------------------
 # process response
 def procResponse(response):
     ro = ResponseObj()
@@ -48,6 +54,7 @@ def procResponse(response):
             ro.cookies[k] = v
     return ro
 
+#----------------------------------------
 # fix cookie expires
 def fixCookieExpires(cookieStr):
     if cookieStr is None:
@@ -72,6 +79,7 @@ def fixCookieExpires(cookieStr):
     r = ';'.join(parts2)
     return r
 
+#----------------------------------------
 # POST specific type request/response
 def postt(c, path, data, requestType, responseType):
     headers = {
@@ -85,6 +93,7 @@ def postt(c, path, data, requestType, responseType):
         r = requests.post(url, headers=headers, data=data, verify=False)
     return r
 
+#----------------------------------------
 # PUT specific type request/response
 def putt(c, path, data, requestType, responseType):
     headers = {
@@ -98,6 +107,7 @@ def putt(c, path, data, requestType, responseType):
         r = requests.put(url, headers=headers, data=data, verify=False)
     return r
 
+#----------------------------------------
 # PATCH specific type request/response
 def patcht(c, path, data, requestType, responseType):
     headers = {
@@ -111,6 +121,7 @@ def patcht(c, path, data, requestType, responseType):
         r = requests.patch(url, headers=headers, data=data, verify=False)
     return r
 
+#----------------------------------------
 # GET json
 def getj(c, path):
     r = gett(c, path, t_json)
@@ -122,6 +133,7 @@ def getj(c, path):
         u.l(f'response = {r.text}')
     return ro
 
+#----------------------------------------
 # GET html
 def geth(c, path):
     r = gett(c, path, t_html)
@@ -129,6 +141,7 @@ def geth(c, path):
     ro.data = r.text
     return ro
 
+#----------------------------------------
 # POST form, get json
 def postfj(c, path, data):
     r = postt(c, path, data, t_form, t_json)
@@ -140,6 +153,7 @@ def postfj(c, path, data):
         u.l(f'response = {r.text}')
     return ro
 
+#----------------------------------------
 # POST form, get html
 def postfh(c, path, data):
     r = postt(c, path, data, t_form, t_html)
@@ -147,6 +161,7 @@ def postfh(c, path, data):
     ro.data = r.text
     return ro
 
+#----------------------------------------
 # POST text, get json
 def posthj(c, path, data):
     r = postt(c, path, data, t_html, t_json)
@@ -158,6 +173,7 @@ def posthj(c, path, data):
         u.l(f'response = {r.text}')
     return ro
 
+#----------------------------------------
 # POST json, get json
 def postjj(c, path, data):
     data = u.mtoj(data)
@@ -170,6 +186,7 @@ def postjj(c, path, data):
         u.l(f'response = {r.text}')
     return ro
 
+#----------------------------------------
 # PUT json, get json
 def putjj(c, path, data):
     data = u.mtoj(data)
@@ -182,6 +199,7 @@ def putjj(c, path, data):
         u.l(f'response = {r.text}')
     return ro
 
+#----------------------------------------
 # PATCH json, get json
 def patchjj(c, path, data):
     data = u.mtoj(data)
@@ -194,6 +212,7 @@ def patchjj(c, path, data):
         u.l(f'response = {r.text}')
     return ro
 
+#----------------------------------------
 # POST multi
 def postMulti(c, path, data):
     headers = {}
@@ -204,6 +223,7 @@ def postMulti(c, path, data):
         r = requests.post(url, headers=headers, files=data, verify=False)
     return r
 
+#----------------------------------------
 # DELETE
 def delete(c, path):
     headers = {}

@@ -15,7 +15,7 @@ import queue
 utf8 = 'utf-8'
 
 def test():
-    print('hello from test function in baselayer module')
+    print('hello from test function in baselayer module 1.4')
 
 
 #----------------------------------------

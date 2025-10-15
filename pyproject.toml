@@ -1,6 +1,6 @@
 [project]
 name = "satkbl"
-version = "0.1.2"
+version = "0.1.4"
 description = "Baselayer for use within the satk ecosystem"
 readme = "README.md"
 requires-python = ">=3.13"
